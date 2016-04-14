@@ -12,7 +12,7 @@ app.run(function($ionicPlatform) {
 });
 
 app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDeviceMotion) {
-
+    $scope.errorMsg = 'Launched';
     // watch Acceleration options
     $scope.options = {
         frequency: 100, // Measure every 100ms
@@ -45,11 +45,10 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
         $scope.startWatching = function() {
             $scope.errorMsg = 'Watch button clicked';
             // Device motion configuration
-            $scope.watch = $cordovaDeviceMotion.watchAcceleration($scope.options);
+            $scope.watch = $cordovaDeviceMotion.watchAcceleration({frequency: 100});
 
             // Device motion initilaization
             $scope.watch.then(null, function(error) {
-                console.log(error);
                 $scope.errorMsg = error;
             },function(result) {
                 $scope.errorMsg = 'Watch started';
@@ -67,7 +66,14 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
 
         // Stop watching method
         $scope.stopWatching = function() {
-            $scope.watch.clearWatch();
+          $cordovaDeviceMotion.clearWatch(watch)
+          .then(function(result) {
+            // success
+            $scope.errorMsg = 'Stopped';
+            }, function (error) {
+            // error
+            $scope.errorMsg = error;
+          });
         };
 
         // Detect shake method

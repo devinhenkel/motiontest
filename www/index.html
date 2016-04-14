@@ -22,22 +22,22 @@
 
 <body ng-app="starter">
 
-    <ion-pane ng-controller="MotionController">
+    <ion-pane>
         <ion-header-bar class="bar-stable">
             <h1 class="title">Start Watching Device Motion</h1>
         </ion-header-bar>
 
-        <ion-content>
+        <ion-content ng-controller="MotionController">
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">Frequency</span>
                     <input type="text" placeholder="0" ng-model="options.frequency">
                 </label>
             </div>
-            <button class="button button-full button-positive" ng-click="startWatching()">
+            <button class="button button-full button-positive" type="button" ng-click="startWatching()">
                 Start Measurement
             </button>
-            <button class="button button-full button-positive" ng-click="stopWatching()">
+            <button class="button button-full button-positive" type="button" ng-click="stopWatching()">
                 Stop Measurement
             </button>
             <h2>X: {{measurements.x}}</h2>
