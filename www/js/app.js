@@ -19,19 +19,21 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
         deviation : 25  // We'll use deviation to determine the shake event, best values in the range between 25 and 30
     };
 
+    $scope.timingoption = { frequency: 100 };
+
     // Current measurements
     $scope.measurements = {
-        x : null,
-        y : null,
-        z : null,
+        x : 0,
+        y : 0,
+        z : 0,
         timestamp : null
     };
 
     // Previous measurements
     $scope.previousMeasurements = {
-        x : null,
-        y : null,
-        z : null,
+        x : 0,
+        y : 0,
+        z : 0,
         timestamp : null
     };
 
@@ -45,10 +47,10 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
         $scope.startWatching = function() {
             $scope.errorMsg = 'Watch button clicked';
             // Device motion configuration
-            $scope.watch = $cordovaDeviceMotion.watchAcceleration({frequency: 100});
+            var watch = $cordovaDeviceMotion.watchAcceleration($scope.timingoption);
 
             // Device motion initilaization
-            $scope.watch.then(null, function(error) {
+            watch.then(null, function(error) {
                 $scope.errorMsg = error;
             },function(result) {
                 $scope.errorMsg = 'Watch started';
