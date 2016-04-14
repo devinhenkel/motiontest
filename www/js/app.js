@@ -25,7 +25,7 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
         y : null,
         z : null,
         timestamp : null
-    }
+    };
 
     // Previous measurements
     $scope.previousMeasurements = {
@@ -33,7 +33,7 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
         y : null,
         z : null,
         timestamp : null
-    }
+    };
 
     // Watcher object
     $scope.watch = null;
@@ -43,7 +43,7 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
 
         //Start Watching method
         $scope.startWatching = function() {
-
+            $scope.errorMsg = 'Watch button clicked';
             // Device motion configuration
             $scope.watch = $cordovaDeviceMotion.watchAcceleration($scope.options);
 
@@ -52,7 +52,7 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
                 console.log(error);
                 $scope.errorMsg = error;
             },function(result) {
-
+                $scope.errorMsg = 'Watch started';
                 // Set current data
                 $scope.measurements.x = result.x;
                 $scope.measurements.y = result.y;
@@ -68,11 +68,11 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
         // Stop watching method
         $scope.stopWatching = function() {
             $scope.watch.clearWatch();
-        }
+        };
 
         // Detect shake method
         $scope.detectShake = function(result) {
-
+            $scope.errorMsg = 'Shake detected';
             //Object to hold measurement difference between current and old data
             var measurementsChange = {};
 
@@ -81,6 +81,7 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
                 measurementsChange.x = Math.abs($scope.previousMeasurements.x, result.x);
                 measurementsChange.y = Math.abs($scope.previousMeasurements.y, result.y);
                 measurementsChange.z = Math.abs($scope.previousMeasurements.z, result.z);
+                $scope.errorMsg = 'Movement detected';
             }
 
             // If measurement change is bigger then predefined deviation
@@ -94,7 +95,7 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
                     x: null,
                     y: null,
                     z: null
-                }
+                };
 
             } else {
                 // On first measurements set it as the previous one
@@ -102,10 +103,10 @@ app.controller('MotionController', function($scope, $ionicPlatform, $cordovaDevi
                     x: result.x,
                     y: result.y,
                     z: result.z
-                }
+                };
             }
 
-        }
+        };
 
     });
 
