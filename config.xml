@@ -23,5 +23,6 @@
 
     <feature name="StatusBar">
       <param name="ios-package" value="CDVStatusBar" onload="true" />
-    </feature>
+    </feature>  
+  <plugin name="cordova-plugin-device-motion" spec="1.2.0"/>
 </widget>
