@@ -22,6 +22,6 @@
   <gap:plugin name="org.apache.cordova.splashscreen" />
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
-    <plugin name="cordova-plugin-device-motion" source="pgb" />
   </feature>
+  <plugin name="cordova-plugin-device-motion" source="pgb" />
 </widget>
