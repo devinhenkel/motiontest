@@ -68,15 +68,7 @@ exports.defineAutoTests = function () {
           done();
         };
 
-        var onError = function(err){
-            console.log(err);
-            console.log("Skipping gyroscope tests, marking all as pending.");
-            isAccelExist = false;
-            expect(true).toBe(true);
-            done();
-         }
-
-        navigator.accelerometer.getCurrentAcceleration(win, onError);
+        navigator.accelerometer.getCurrentAcceleration(win, fail.bind(null, done));
       });
 
       it("accelerometer.spec.4 success callback Acceleration object should have (reasonable) values for x, y and z expressed in m/s^2", function(done) {

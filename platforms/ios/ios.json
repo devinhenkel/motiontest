@@ -42,6 +42,6 @@
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-device-motion": "1.2.0"
+        "cordova-plugin-device-motion": "1.1.1"
     }
 }
